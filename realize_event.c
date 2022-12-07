@@ -6,141 +6,151 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:05:44 by jole              #+#    #+#             */
-/*   Updated: 2022/12/05 21:14:08 by jole             ###   ########.fr       */
+/*   Updated: 2022/12/07 23:40:37 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <stdio.h> ///// asdas dffwpeokfeofsopfkskofsofk
 
-void	event_w(char **param)
+void	event_w(t_list *list, int x)
 {
-	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
-	while (param[y][x] != 0)
+	while (list->array[y][x] != 0)
 	{
-		while (param[y][x] != 0)
+		while (list->array[y][x] != 0)
 		{
-			if (param[y][x] == 'P')
+			if (list->array[y][x] == 'P')
 				break;
 			x++;
 		}
-		if (param[y][x] == 'P')
+		if (list->array[y][x] == 'P')
 			break;	
 		x = 0;
 		y++;
 	}
-	printf("you pressed w\n");
-	if (param[y - 1][x] != '1')
+	if (list->array[y - 1][x] != '1')
 	{
-		param[y - 1][x] = 'P';
-		param[y][x] = '0';
+		if (list->array[y - 1][x] == 'E' && list->poopoos != 0)
+			return ;
+		list->actions += 1;
+		printf("%d\n", list->actions);
+		if (list->array[y - 1][x] == 'C')
+		{
+			printf("hey i collected poopoo\n");
+			list->poopoos -= 1;
+		}
+		list->array[y - 1][x] = 'P';
+		list->array[y][x] = '0';
 	}
-	printf("%s\n", param[0]);
-	printf("%s\n", param[1]);
-	printf("%s\n", param[2]);
-	printf("%s\n", param[3]);
-	printf("%s\n", param[4]);
+	printf("poopoos:%d\n", list->poopoos);
+	modify_image(*list); 
 }
 
-void	event_a(char **param)
+void	event_a(t_list *list, int x)
 {
-	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
-	while (param[y][x] != 0)
+	while (list->array[y][x] != 0)
 	{
-		while (param[y][x] != 0)
+		while (list->array[y][x] != 0)
 		{
-			if (param[y][x] == 'P')
+			if (list->array[y][x] == 'P')
 				break;
 			x++;
 		}
-		if (param[y][x] == 'P')
+		if (list->array[y][x] == 'P')
 			break;	
 		x = 0;
 		y++;
 	}
-	printf("you pressed a\n");
-	if (param[y][x - 1] != '1')
+	if (list->array[y][x - 1] != '1')
 	{
-		param[y][x - 1] = 'P';
-		param[y][x] = '0';
+		if (list->array[y][x - 1] == 'E' && list->poopoos != 0)
+			return ;
+		list->actions += 1;
+		printf("%d\n", list->actions);
+		if (list->array[y][x - 1] == 'C')
+		{
+			printf("hey i collected poopoo\n");
+			list->poopoos -= 1;
+		}
+		if (list->poopoos == 0 && list->array[y][x - 1] == 'E')
+			exit (0);
+		list->array[y][x - 1] = 'P';
+		list->array[y][x] = '0';
 	}
-	printf("%s\n", param[0]);
-	printf("%s\n", param[1]);
-	printf("%s\n", param[2]);
-	printf("%s\n", param[3]);
-	printf("%s\n", param[4]);
+	printf("poopoos:%d\n", list->poopoos);
+	modify_image(*list); 
 }
 
-void	event_s(char **param)
+void	event_s(t_list *list, int x)
 {
-	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
-	while (param[y][x] != 0)
+	while (list->array[y][x] != 0)
 	{
-		while (param[y][x] != 0)
+		while (list->array[y][x] != 0)
 		{
-			if (param[y][x] == 'P')
+			if (list->array[y][x] == 'P')
 				break;
 			x++;
 		}
-		if (param[y][x] == 'P')
+		if (list->array[y][x] == 'P')
 			break;	
 		x = 0;
 		y++;
 	}
-	printf("you pressed s\n");
-	if (param[y + 1][x] != '1')
+	if (list->array[y + 1][x] != '1')
 	{
-		param[y + 1][x] = 'P';
-		param[y][x] = '0';
+		list->actions += 1;
+		printf("%d\n", list->actions);
+		if (list->array[y + 1][x] == 'C')
+		{
+			printf("hey i collected poopoo\n");
+			list->poopoos -= 1;
+		}
+		list->array[y + 1][x] = 'P';
+		list->array[y][x] = '0';
 	}
-	printf("%s\n", param[0]);
-	printf("%s\n", param[1]);
-	printf("%s\n", param[2]);
-	printf("%s\n", param[3]);
-	printf("%s\n", param[4]);
+	printf("poopoos:%d\n", list->poopoos);
+	modify_image(*list);
 }
 
-void	event_d(char **param)
+void	event_d(t_list *list, int x)
 {
-	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
-	while (param[y][x] != 0)
+	while (list->array[y][x] != 0)
 	{
-		while (param[y][x] != 0)
+		while (list->array[y][x] != 0)
 		{
-			if (param[y][x] == 'P')
+			if (list->array[y][x] == 'P')
 				break;
 			x++;
 		}
-		if (param[y][x] == 'P')
+		if (list->array[y][x] == 'P')
 			break;	
 		x = 0;
 		y++;
 	}
-	printf("you pressed d\n");
-	if (param[y][x + 1] != '1')
+	if (list->array[y][x + 1] != '1')
 	{
-		param[y][x + 1] = 'P';
-		param[y][x] = '0';
+		list->actions += 1;
+		printf("%d\n", list->actions);
+		if (list->array[y][x + 1] == 'C')
+		{
+			printf("hey i collected poopoo\n");
+			list->poopoos -= 1;
+		}
+		list->array[y][x + 1] = 'P';
+		list->array[y][x] = '0';
 	}
-	printf("%s\n", param[0]);
-	printf("%s\n", param[1]);
-	printf("%s\n", param[2]);
-	printf("%s\n", param[3]);
-	printf("%s\n", param[4]);
+	printf("poopoos:%d\n", list->poopoos);
+	modify_image(*list); 
 }

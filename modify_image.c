@@ -6,48 +6,51 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:00:00 by jole              #+#    #+#             */
-/*   Updated: 2022/12/05 15:21:08 by jole             ###   ########.fr       */
+/*   Updated: 2022/12/07 23:05:16 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <stdio.h> /// asdasdfmwepogmwegowemgwemopgmweogmowemgowemop
 
-void	modify_image(void *mlx_ptr, void *win_ptr, char *line)
+void	modify_image(t_list list)
 {
+	int		x;
 	int		y;
-	int		i;
+	int		pixel_x;
+	int		pixel_y;
+	int		object;
 
+	x = 0;
 	y = 0;
-	i = 0;
-	while (line[i] != 0)
+	pixel_x = 0;
+	pixel_y = 0;
+	while (y < list.row)
 	{
-		modify_image2(mlx_ptr, win_ptr, &line[i], y);
-		while (line[i] != '\n' && line[i] != 0)
-			i++;
-		i++;
-		y += 23;
+		while (list.array[y][x] != 0)
+		{
+			object = list.array[y][x];
+			pixel_x = modify_image2(list, pixel_x, pixel_y, object);
+			x++;
+		}
+		x = 0;
+		y++;
+		pixel_x = 0;
+		pixel_y += 23;
 	}
 }
 
-void	modify_image2(void *mlx_ptr, void *win_ptr, char *line, int y)
+int	modify_image2(t_list list, int pixel_x, int pixel_y, int object)
 {
-	int	x;
-	int	i;
-
-	x = 0;
-	i = 0;
-	while (line[i] != '\n' && line[i] != 0)
-	{
-		if (line[i] == '1')
-			x += put_wall(mlx_ptr, win_ptr, x, y);
-		if (line[i] == '0')
-			x += put_tile(mlx_ptr, win_ptr, x, y);
-		if (line[i] == 'C')
-			x += put_collectable(mlx_ptr, win_ptr, x, y);
-		if (line[i] == 'P')
-			x += put_player(mlx_ptr, win_ptr, x, y);
-		if (line[i] == 'E')
-			x += put_exit(mlx_ptr, win_ptr, x, y);
-		i++;
-	}
+	if (object == '1')
+		pixel_x += put_wall(list, pixel_x, pixel_y);
+	if (object == '0')
+		pixel_x += put_tile(list, pixel_x, pixel_y);
+	if (object == 'C')
+		pixel_x += put_collectable(list, pixel_x, pixel_y);
+	if (object == 'P')
+		pixel_x += put_player(list, pixel_x, pixel_y);
+	if (object == 'E')
+		pixel_x += put_exit(list, pixel_x, pixel_y);
+	return (pixel_x);
 }

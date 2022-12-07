@@ -6,13 +6,13 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:23:53 by jole              #+#    #+#             */
-/*   Updated: 2022/12/05 15:36:17 by jole             ###   ########.fr       */
+/*   Updated: 2022/12/07 23:04:40 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	put_wall(void *mlx_ptr, void *win_ptr, int x, int y)
+int	put_wall(t_list list, int pixel_x, int pixel_y)
 {
 	void	*wall;
 	int		img_width;
@@ -20,12 +20,12 @@ int	put_wall(void *mlx_ptr, void *win_ptr, int x, int y)
 
 	img_width = 0;
 	img_height = 0;
-	wall = mlx_xpm_file_to_image(mlx_ptr, "wall", &img_width, &img_height);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, wall, x, y);
+	wall = mlx_xpm_file_to_image(list.mlx_ptr, "wall", &img_width, &img_height);
+	mlx_put_image_to_window(list.mlx_ptr, list.win_ptr, wall, pixel_x, pixel_y);
 	return (23);
 }
 
-int	put_tile(void *mlx_ptr, void *win_ptr, int x, int y)
+int	put_tile(t_list list, int pixel_x, int pixel_y)
 {
 	void	*tile;
 	int		img_width;
@@ -33,12 +33,12 @@ int	put_tile(void *mlx_ptr, void *win_ptr, int x, int y)
 
 	img_width = 0;
 	img_height = 0;
-	tile = mlx_xpm_file_to_image(mlx_ptr, "tile", &img_width, &img_height);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, tile, x, y);
+	tile = mlx_xpm_file_to_image(list.mlx_ptr, "tile", &img_width, &img_height);
+	mlx_put_image_to_window(list.mlx_ptr, list.win_ptr, tile, pixel_x, pixel_y);
 	return (23);
 }
 
-int	put_collectable(void *mlx_ptr, void *win_ptr, int x, int y)
+int	put_collectable(t_list list, int pixel_x, int pixel_y)
 {
 	void	*collectable;
 	int		img_width;
@@ -46,12 +46,12 @@ int	put_collectable(void *mlx_ptr, void *win_ptr, int x, int y)
 
 	img_width = 0;
 	img_height = 0;
-	collectable = mlx_xpm_file_to_image(mlx_ptr, "collectable", &img_width, &img_height);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, collectable, x, y);
+	collectable = mlx_xpm_file_to_image(list.mlx_ptr, "collectable", &img_width, &img_height);
+	mlx_put_image_to_window(list.mlx_ptr, list.win_ptr, collectable, pixel_x, pixel_y);
 	return (23);
 }
 
-int	put_player(void *mlx_ptr, void *win_ptr, int x, int y)
+int	put_player(t_list list, int pixel_x, int pixel_y)
 {
 	void	*player;
 	int		img_width;
@@ -59,12 +59,12 @@ int	put_player(void *mlx_ptr, void *win_ptr, int x, int y)
 
 	img_width = 0;
 	img_height = 0;
-	player = mlx_xpm_file_to_image(mlx_ptr, "player", &img_width, &img_height);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, player, x, y);
+	player = mlx_xpm_file_to_image(list.mlx_ptr, "player", &img_width, &img_height);
+	mlx_put_image_to_window(list.mlx_ptr, list.win_ptr, player, pixel_x, pixel_y);
 	return (23);
 }
 
-int	put_exit(void *mlx_ptr, void *win_ptr, int x, int y)
+int	put_exit(t_list list, int pixel_x, int pixel_y)
 {
 	void	*exit;
 	int		img_width;
@@ -72,7 +72,7 @@ int	put_exit(void *mlx_ptr, void *win_ptr, int x, int y)
 
 	img_width = 0;
 	img_height = 0;
-	exit = mlx_xpm_file_to_image(mlx_ptr, "exit", &img_width, &img_height);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, exit, x, y);
+	exit = mlx_xpm_file_to_image(list.mlx_ptr, "exit", &img_width, &img_height);
+	mlx_put_image_to_window(list.mlx_ptr, list.win_ptr, exit, pixel_x, pixel_y);
 	return (23);
 }
