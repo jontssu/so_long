@@ -6,12 +6,11 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:05:44 by jole              #+#    #+#             */
-/*   Updated: 2022/12/07 23:40:37 by jole             ###   ########.fr       */
+/*   Updated: 2023/01/17 12:46:12 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h> ///// asdas dffwpeokfeofsopfkskofsofk
 
 void	event_w(t_list *list, int x)
 {
@@ -23,11 +22,11 @@ void	event_w(t_list *list, int x)
 		while (list->array[y][x] != 0)
 		{
 			if (list->array[y][x] == 'P')
-				break;
+				break ;
 			x++;
 		}
 		if (list->array[y][x] == 'P')
-			break;	
+			break ;
 		x = 0;
 		y++;
 	}
@@ -35,18 +34,9 @@ void	event_w(t_list *list, int x)
 	{
 		if (list->array[y - 1][x] == 'E' && list->poopoos != 0)
 			return ;
-		list->actions += 1;
-		printf("%d\n", list->actions);
-		if (list->array[y - 1][x] == 'C')
-		{
-			printf("hey i collected poopoo\n");
-			list->poopoos -= 1;
-		}
-		list->array[y - 1][x] = 'P';
-		list->array[y][x] = '0';
+		list->prow -= 1;
+		list = event_w2(list, x, y);
 	}
-	printf("poopoos:%d\n", list->poopoos);
-	modify_image(*list); 
 }
 
 void	event_a(t_list *list, int x)
@@ -59,11 +49,11 @@ void	event_a(t_list *list, int x)
 		while (list->array[y][x] != 0)
 		{
 			if (list->array[y][x] == 'P')
-				break;
+				break ;
 			x++;
 		}
 		if (list->array[y][x] == 'P')
-			break;	
+			break ;
 		x = 0;
 		y++;
 	}
@@ -71,20 +61,9 @@ void	event_a(t_list *list, int x)
 	{
 		if (list->array[y][x - 1] == 'E' && list->poopoos != 0)
 			return ;
-		list->actions += 1;
-		printf("%d\n", list->actions);
-		if (list->array[y][x - 1] == 'C')
-		{
-			printf("hey i collected poopoo\n");
-			list->poopoos -= 1;
-		}
-		if (list->poopoos == 0 && list->array[y][x - 1] == 'E')
-			exit (0);
-		list->array[y][x - 1] = 'P';
-		list->array[y][x] = '0';
+		list->pcol -= 1;
+		list = event_a2(list, x, y);
 	}
-	printf("poopoos:%d\n", list->poopoos);
-	modify_image(*list); 
 }
 
 void	event_s(t_list *list, int x)
@@ -97,28 +76,21 @@ void	event_s(t_list *list, int x)
 		while (list->array[y][x] != 0)
 		{
 			if (list->array[y][x] == 'P')
-				break;
+				break ;
 			x++;
 		}
 		if (list->array[y][x] == 'P')
-			break;	
+			break ;
 		x = 0;
 		y++;
 	}
 	if (list->array[y + 1][x] != '1')
 	{
-		list->actions += 1;
-		printf("%d\n", list->actions);
-		if (list->array[y + 1][x] == 'C')
-		{
-			printf("hey i collected poopoo\n");
-			list->poopoos -= 1;
-		}
-		list->array[y + 1][x] = 'P';
-		list->array[y][x] = '0';
+		if (list->array[y + 1][x] == 'E' && list->poopoos != 0)
+			return ;
+		list->prow += 1;
+		list = event_s2(list, x, y);
 	}
-	printf("poopoos:%d\n", list->poopoos);
-	modify_image(*list);
 }
 
 void	event_d(t_list *list, int x)
@@ -131,26 +103,19 @@ void	event_d(t_list *list, int x)
 		while (list->array[y][x] != 0)
 		{
 			if (list->array[y][x] == 'P')
-				break;
+				break ;
 			x++;
 		}
 		if (list->array[y][x] == 'P')
-			break;	
+			break ;
 		x = 0;
 		y++;
 	}
 	if (list->array[y][x + 1] != '1')
 	{
-		list->actions += 1;
-		printf("%d\n", list->actions);
-		if (list->array[y][x + 1] == 'C')
-		{
-			printf("hey i collected poopoo\n");
-			list->poopoos -= 1;
-		}
-		list->array[y][x + 1] = 'P';
-		list->array[y][x] = '0';
+		if (list->array[y][x + 1] == 'E' && list->poopoos != 0)
+			return ;
+		list->pcol += 1;
+		list = event_d2(list, x, y);
 	}
-	printf("poopoos:%d\n", list->poopoos);
-	modify_image(*list); 
 }

@@ -6,58 +6,58 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 22:21:07 by jole              #+#    #+#             */
-/*   Updated: 2022/12/07 23:20:14 by jole             ###   ########.fr       */
+/*   Updated: 2023/01/17 13:37:29 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h> // moi poistaa taa :)
 
-t_list	check_valid_chars(t_list list)
+t_list	*check_valid_chars(t_list *list)
 {
 	int	x;
 	int	y;
-	int	i;
-	int	j;
 
 	x = 0;
 	y = 0;
-	i = list.col;
-	j = list.row;
-	while (j > 0)
+	while (y < list->row)
 	{
-		while (i > 0)
+		while (x < list->col)
 		{
-			if (list.array[y][x] == 'C')
-				list.poopoos += 1;
-			if (list.array[y][x] == 'E')
-			{
-				list.exits += 1;
-				if (list.exits > 1)
-				{
-					printf("Invalid map, too many exits");
-					list.map_is = 0;
-					return (list);
-				}
-			}
-			if (list.array[y][x] == 'P')
-			{
-				list.starts += 1;
-				if (list.starts > 1)
-				{
-					list.map_is = 0;
-					printf("Invalid map, too many starts");
-					return (list);
-				}
-			}
-			x++;
-			i--;
+			list = check_valid_chars2(list, x, y);
+			list = check_valid_chars3(list, x++, y);
 		}
-		i = list.col;
-		j--;
 		x = 0;
 		y++;
 	}
-	printf("starting poop: %d", list.poopoos);
+	return (list);
+}
+
+t_list	*check_valid_chars2(t_list *list, int x, int y)
+{	
+	if (list->array[y][x] == 'C')
+		list->poopoos += 1;
+	if (list->array[y][x] == 'E')
+	{
+		list->exits += 1;
+		if (list->exits > 1)
+		{
+			ft_printf("Error\nToo many exits\n");
+			exit(0);
+		}
+	}
+	return (list);
+}
+
+t_list	*check_valid_chars3(t_list *list, int x, int y)
+{
+	if (list->array[y][x] == 'P')
+	{
+		list->starts += 1;
+		if (list->starts > 1)
+		{
+			ft_printf("Error\nToo many players\n");
+			exit(0);
+		}
+	}
 	return (list);
 }
