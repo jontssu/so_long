@@ -6,13 +6,11 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 09:28:46 by jole              #+#    #+#             */
-/*   Updated: 2023/01/17 12:45:57 by jole             ###   ########.fr       */
+/*   Updated: 2023/01/18 17:00:45 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "so_long.h"
 
 int	ft_malloc_cnt(char *file);
 
@@ -51,7 +49,10 @@ int	ft_malloc_cnt(char *file)
 	count = 0;
 	openval = open(file, O_RDONLY);
 	if (openval < 0)
-		return (0);
+	{
+		ft_printf("Error\nInvalid filename\n");
+		exit (0);
+	}
 	while (readval)
 	{
 		readval = read(openval, input, 5000);

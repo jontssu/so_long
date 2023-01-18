@@ -6,7 +6,7 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 22:21:07 by jole              #+#    #+#             */
-/*   Updated: 2023/01/17 13:37:29 by jole             ###   ########.fr       */
+/*   Updated: 2023/01/18 18:40:56 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,26 @@ t_list	*check_valid_chars(t_list *list)
 		x = 0;
 		y++;
 	}
+	if (list->poopoos < 1 || list->emptys < 1)
+	{
+		if (list->poopoos < 1)
+			ft_printf("Error\nNo poopoos???\n");
+		else
+			ft_printf("Error\nNo empty space\n");
+		terminate(list);
+	}
 	return (list);
 }
 
 t_list	*check_valid_chars2(t_list *list, int x, int y)
-{	
+{
+	if (list->array[y][x] != 'C' && list->array[y][x] != 'E' && \
+		list->array[y][x] != 'P' && list->array[y][x] != '0' && \
+	list->array[y][x] != '1')
+	{
+		ft_printf("Error\nInvalid component in map\n");
+		terminate(list);
+	}
 	if (list->array[y][x] == 'C')
 		list->poopoos += 1;
 	if (list->array[y][x] == 'E')
@@ -59,5 +74,7 @@ t_list	*check_valid_chars3(t_list *list, int x, int y)
 			exit(0);
 		}
 	}
+	if (list->array[y][x] == '0')
+		list->emptys += 1;
 	return (list);
 }

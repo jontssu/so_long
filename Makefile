@@ -6,7 +6,7 @@
 #    By: jole <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/08 04:47:47 by jole              #+#    #+#              #
-#    Updated: 2023/01/18 12:23:25 by jole             ###   ########.fr        #
+#    Updated: 2023/01/18 18:50:18 by jole             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = so_long
 
 LIBFT = libft.a
 
-SRC = check_valid_file_name.c check_valid_route.c check_valid_chars.c check_valid_map.c realize_event2.c realize_event.c convert_to_array.c put_argument.c modify_image.c calculate_height.c calculate_width.c read_file.c check_rectangularity.c so_long.c set_argument.c initialize_window.c initialize_variables.c ft_printf.c 
+SRC = check_valid_file_name.c check_valid_route.c check_valid_chars.c check_valid_map.c realize_event2.c realize_event.c convert_to_array.c put_argument.c modify_image.c calculate_width.c read_file.c check_rectangularity.c so_long.c set_argument.c initialize_window.c initialize_variables.c ft_printf.c 
 
 OSRC = $(SRC:%.c=%.o)
 

@@ -6,7 +6,7 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:05:44 by jole              #+#    #+#             */
-/*   Updated: 2023/01/17 12:46:12 by jole             ###   ########.fr       */
+/*   Updated: 2023/01/18 18:35:44 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	event_w(t_list *list, int x)
 	}
 	if (list->array[y - 1][x] != '1')
 	{
-		if (list->array[y - 1][x] == 'E' && list->poopoos != 0)
-			return ;
 		list->prow -= 1;
 		list = event_w2(list, x, y);
 	}
@@ -59,8 +57,6 @@ void	event_a(t_list *list, int x)
 	}
 	if (list->array[y][x - 1] != '1')
 	{
-		if (list->array[y][x - 1] == 'E' && list->poopoos != 0)
-			return ;
 		list->pcol -= 1;
 		list = event_a2(list, x, y);
 	}
@@ -86,8 +82,6 @@ void	event_s(t_list *list, int x)
 	}
 	if (list->array[y + 1][x] != '1')
 	{
-		if (list->array[y + 1][x] == 'E' && list->poopoos != 0)
-			return ;
 		list->prow += 1;
 		list = event_s2(list, x, y);
 	}
@@ -113,8 +107,6 @@ void	event_d(t_list *list, int x)
 	}
 	if (list->array[y][x + 1] != '1')
 	{
-		if (list->array[y][x + 1] == 'E' && list->poopoos != 0)
-			return ;
 		list->pcol += 1;
 		list = event_d2(list, x, y);
 	}

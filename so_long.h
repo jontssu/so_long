@@ -6,7 +6,7 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 06:30:45 by jole              #+#    #+#             */
-/*   Updated: 2023/01/18 14:38:31 by jole             ###   ########.fr       */
+/*   Updated: 2023/01/18 18:53:17 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 # include <mlx.h>
 # include <fcntl.h>
-# include <unistd.h> // tarviiks ?
+# include <unistd.h>
 # include <stdlib.h>
 
 typedef struct s_list
@@ -31,6 +31,7 @@ typedef struct s_list
 	void	*exit;
 	int		col;
 	int		row;
+	int		on_exit;
 	int		printx;
 	int		printy;
 	int		pcol;
@@ -46,15 +47,15 @@ typedef struct s_list
 	int		poopoo_check;
 	int		exits;
 	int		starts;
-	int		map_is;
+	int		emptys;
 }			t_list;
 
 int		ft_printf(const char *s, ...);
 int		check_valid_file_name(char *str);
 void	initialize_variables(t_list *list);
 char	*read_file(char *file);
-int		calculate_width(char *line);
-int		calculate_height(char *line);
+void	calculate_width(t_list *list);
+void	calculate_height(t_list *list);
 void	check_rectangularity(t_list *list);
 char	**convert_to_array(t_list *list);
 char	**convert_to_array2(t_list *list);

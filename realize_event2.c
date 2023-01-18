@@ -6,7 +6,7 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 05:34:51 by jole              #+#    #+#             */
-/*   Updated: 2023/01/18 14:48:24 by jole             ###   ########.fr       */
+/*   Updated: 2023/01/18 18:33:59 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,16 @@ t_list	*event_w2(t_list *list, int x, int y)
 	}
 	if (list->poopoos == 0 && list->array[y - 1][x] == 'E')
 		terminate(list);
+	if (list->on_exit == 0)
+		list->array[y][x] = '0';
+	else
+	{
+		list->array[y][x] = 'E';
+		list->on_exit = 0;
+	}
+	if (list->array[y - 1][x] == 'E')
+		list->on_exit = 1;
 	list->array[y - 1][x] = 'P';
-	list->array[y][x] = '0';
 	modify_image(list);
 	return (list);
 }
@@ -44,8 +52,16 @@ t_list	*event_a2(t_list *list, int x, int y)
 	}
 	if (list->poopoos == 0 && list->array[y][x - 1] == 'E')
 		terminate(list);
+	if (list->on_exit == 0)
+		list->array[y][x] = '0';
+	else
+	{
+		list->array[y][x] = 'E';
+		list->on_exit = 0;
+	}
+	if (list->array[y][x - 1] == 'E')
+		list->on_exit = 1;
 	list->array[y][x - 1] = 'P';
-	list->array[y][x] = '0';
 	modify_image(list);
 	return (list);
 }
@@ -63,8 +79,16 @@ t_list	*event_s2(t_list *list, int x, int y)
 	}
 	if (list->poopoos == 0 && list->array[y + 1][x] == 'E')
 		terminate(list);
+	if (list->on_exit == 0)
+		list->array[y][x] = '0';
+	else
+	{
+		list->array[y][x] = 'E';
+		list->on_exit = 0;
+	}
+	if (list->array[y + 1][x] == 'E')
+		list->on_exit = 1;
 	list->array[y + 1][x] = 'P';
-	list->array[y][x] = '0';
 	modify_image(list);
 	return (list);
 }
@@ -82,8 +106,16 @@ t_list	*event_d2(t_list *list, int x, int y)
 	}
 	if (list->poopoos == 0 && list->array[y][x + 1] == 'E')
 		terminate(list);
+	if (list->on_exit == 0)
+		list->array[y][x] = '0';
+	else
+	{
+		list->array[y][x] = 'E';
+		list->on_exit = 0;
+	}
+	if (list->array[y][x + 1] == 'E')
+		list->on_exit = 1;
 	list->array[y][x + 1] = 'P';
-	list->array[y][x] = '0';
 	modify_image(list);
 	return (list);
 }
