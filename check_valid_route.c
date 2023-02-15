@@ -6,7 +6,7 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 01:52:20 by jole              #+#    #+#             */
-/*   Updated: 2023/01/18 14:41:33 by jole             ###   ########.fr       */
+/*   Updated: 2023/02/03 15:39:35 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,21 @@
 
 t_list	*check_valid_route(t_list *list, int x, int y)
 {
-	while (list->array2[y][x] != 0)
+	while (y < list->row && list->array2[y][x] != 'P')
 	{
-		while (list->array2[y][x++] != 0)
-		{
-			if (list->array2[y][x] == 'P')
-			{
-				list->pcol = x;
-				list->prow = y;
-				break ;
-			}
-		}
-		if (list->array2[y][x] == 'P')
-			break ;
 		x = 0;
-		if (y == list->row - 1)
-		{
-			ft_printf("Error\nStarting position not found\n");
-			terminate(list);
-		}
-		y++;
+		while (x < list->col && list->array2[y][x] != 'P')
+			x++;
+		if (list->array2[y][x] != 'P')
+			y++;
 	}
+	if (y == list->row)
+	{
+		ft_printf("Error\nStarting position not found\n");
+		terminate(list);
+	}
+	list->pcol = x;
+	list->prow = y;
 	list = fill_the_route(list, x, y);
 	list = check_for_exit(list);
 	list = check_for_collectibles(list);

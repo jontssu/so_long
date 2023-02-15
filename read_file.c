@@ -6,7 +6,7 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 09:28:46 by jole              #+#    #+#             */
-/*   Updated: 2023/01/18 17:00:45 by jole             ###   ########.fr       */
+/*   Updated: 2023/02/01 19:29:53 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@ char	*read_file(char *file)
 
 	letter = 0;
 	readval = 1;
-	str = (char *)malloc(ft_malloc_cnt(file) * sizeof(char));
+	str = (char *)malloc((1 + ft_malloc_cnt(file)) * sizeof(char));
 	openval = open(file, O_RDONLY);
 	if (openval < 0)
 		return (0);
 	while (readval)
 	{
 		readval = read(openval, input, 1);
-		str[letter++] = input[0];
+		if (readval)
+			str[letter++] = input[0];
 	}
 	str[letter] = 0;
 	close(openval);

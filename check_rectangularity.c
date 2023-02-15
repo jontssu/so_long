@@ -6,7 +6,7 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 06:05:17 by jole              #+#    #+#             */
-/*   Updated: 2023/01/18 12:16:23 by jole             ###   ########.fr       */
+/*   Updated: 2023/02/01 19:44:03 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@ void	check_rectangularity(t_list *list)
 	int	count;
 
 	i = 0;
-	size = 1;
-	count = -1;
+	size = 0;
+	count = 0;
 	while (list->line[i++] != '\n')
 		size++;
 	i = 0;
-	while (list->line[i++] != 0)
+	while (list->line[i] != 0)
 	{
 		if (list->line[i] == '\n')
 			count++;
+		i++;
 	}
-	if (i != (size * count) + 2)
+	i -= count;
+	if (i != (size * count))
 	{
 		ft_printf("Error\nMap is not rectangular\n");
 		terminate(list);

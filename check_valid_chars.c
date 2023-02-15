@@ -6,7 +6,7 @@
 /*   By: jole <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 22:21:07 by jole              #+#    #+#             */
-/*   Updated: 2023/01/18 18:40:56 by jole             ###   ########.fr       */
+/*   Updated: 2023/02/01 19:08:31 by jole             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_list	*check_valid_chars2(t_list *list, int x, int y)
 		if (list->exits > 1)
 		{
 			ft_printf("Error\nToo many exits\n");
-			exit(0);
+			terminate(list);
 		}
 	}
 	return (list);
@@ -70,8 +70,8 @@ t_list	*check_valid_chars3(t_list *list, int x, int y)
 		list->starts += 1;
 		if (list->starts > 1)
 		{
-			ft_printf("Error\nToo many players\n");
-			exit(0);
+			ft_printf("Error\nInvalid amount of players\n");
+			terminate(list);
 		}
 	}
 	if (list->array[y][x] == '0')
